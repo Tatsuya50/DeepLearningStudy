@@ -1,0 +1,15 @@
+定番のConvolutional Neural Networkをゼロから理解する
+	https://deepage.net/deep_learning/2016/11/07/convolutional_neural_network.html
+
+Deep Learning - 活性化関数
+	http://pynote.hatenablog.com/entry/dl-activation-function
+
+Softmaxって何をしてるの？
+	http://hiro2o2.hatenablog.jp/entry/2016/07/21/013805
+
+Kerasを使って活性関数・目的関数・最適化手法をまとめる（ディープラーニング）
+	https://nehori.com/nikki/2018/05/12/post-6821/
+
+Neural networks and back-propagation explained in a simple way
+	https://medium.com/datathings/neural-networks-and-backpropagation-explained-in-a-simple-way-f540a3611f5e
+
