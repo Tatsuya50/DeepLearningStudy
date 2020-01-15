@@ -1,0 +1,396 @@
+2018-08-23
+
+情報実習室３: IPCC301d
+	***************************************************
+	HP EliteDesk 800 G3 TWR
+	---------------------------------------------------
+	Intel Core i5-7500 3.40GHz
+	16 GB (DDR4-2666 8GB x 2)
+	SAMSUNG SSD 512GB MZVLW512HMJP-000H1
+	hp HLDS DVDRW GUD1N (DVD+R DL)
+	
+	NVIDIA GeForce GTX-1080 8GB GDDR5X (2560 CUDA Core)
+	
+	Windows 10 Enterprise 2016 LTSB 64-bit (Ver.1607, OS biuld: 14393.3181)
+	***************************************************
+	
+00.	Windows 10 Professional 64 bit Japanese
+		Version  :  1803
+		OS ビルド:  17134.984
+
+01.	Google Chrome
+		https://www.google.com/chrome/
+		ChromeSetup.exe
+
+02.	Sakura Editor
+		https://sakura-editor.github.io/download.html
+		sakura_install2-2-0-1.exe
+		
+		追加タスクの選択：
+			■ スタートメニューを作成
+			■ Quick Launch にアイコン作成
+			■ プログラム一覧に追加
+			■ デスクトップのアイコン作成
+			■ 「SAKURA で開く」メニューの追加
+			□ 起動時に常駐
+			■ 送るに追加
+
+03.	WinRAR 64 ビットOS用
+		http://www.winrarjapan.com/download
+		winrar-x64-571jp.exe
+		
+		インターフェース:
+			■ デスクトップにショートカットを作成
+			■ WinRAR をスタートメニューに追加
+			■ WinRAR のプログラムグループを作成
+		シェル統合:
+			■ WinRAR をシェルに統合する
+			■ サブメニューにする
+			■ コンテキストメニューにアイコンを表示する
+
+04.	GeForce Experience
+		https://www.nvidia.co.jp/object/geforce-experience-download-jp.html
+		GeForce_Experience_v3.19.0.107.exe
+		NVIDIA Driver Ver.: 436.02
+		カスタム： クリーンインストール
+		
+		Windows インストール直後のデフォルトのドライバ：
+			GeForce GTX 1050 Ti  Ver.430.86
+
+05.	Visual Studio Community 2017
+		https://visualstudio.microsoft.com/ja/vs/older-downloads/
+		Visual Studio Community 2017 (version 15.9)
+			Release date: 13/Aug/2019
+			mul  Japanese  EXE
+		vs_community__316527449.1566490612.exe
+		
+		追加： C++ によるデスクトップ開発
+
+06	CUDA Toolkit 10.1 update2 (Aug 2019)
+		https://developer.nvidia.com/cuda-toolkit-archive
+		Windows → x86_64 → 10 → exe (local)
+		
+		cuda_10.1.243_426.00_win10.exe
+		
+		インストールオプション:
+			カスタム
+		カスタム インストール オプション
+			■ CUDA
+			□ NVIDIA GeForce Experience
+			□ Driver components
+			□ Other components
+	
+	CUDA のバージョンを確認したい場合は、コマンドプロンプト上で
+		nvcc -V
+	を入力すると、以下のように出力される。
+		nvcc: NVIDIA (R) Cuda compiler driver
+		Copyright (c) 2005-2019 NVIDIA Corporation
+		Built on Sun_Jul_28_19:12:52_Pacific_Daylight_Time_2019
+		Cuda compilation tools, release 10.1, V10.1.243
+
+07	cuDNN v7.6.2 (July 22, 2019), for CUDA 10.1
+		https://developer.nvidia.com/rdp/form/cudnn-download-survey
+		cudnn-10.1-windows10-x64-v7.6.2.24.zip
+		
+		解凍後、cuda のフォルダ内の
+			bin
+			include
+			lib
+		の３つのフォルダを
+			C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1
+		の中にある同名のフォルダに上書きコピーする。
+
+08.	cuDNN Version Check
+
+	エディタで以下の内容を cudnn_version.cpp のファイル名で保存する。
+	
+	--------------------------------------------------------
+	#include <cudnn.h>
+	#include <iostream>
+	
+	int main(int argc, char** argv) {
+		std::cout << "CUDNN_VERSION: " << CUDNN_VERSION << std::endl;
+		return 0;
+	}
+	--------------------------------------------------------
+	
+	以下のパスをシステムの環境変数に追加する。
+		C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
+	コマンドプロンプトで以下のコマンドを実行する。
+		nvcc cudnn_version.cpp -o cudnn_version
+	
+	上記で作成した
+		cudnn_version.exe
+	のファイルを下記のフォルダ内にコピーする。
+		C:\Windows\System32
+	
+	コマンドプロンプト上で
+		cudnn_version
+	を実行し、以下のような出力がされることを確認する。
+		CUDNN_VERSION: 7602
+
+09.	Anaconda
+		https://www.anaconda.com/download/
+		Anaconda 2019.07 for Windows
+			Python 3.7 version
+			64-Bit Graphical Installer (486 MB)
+		
+		Anaconda3-2019.07-Windows-x86_64.exe
+		
+		Install for All Users (requires admin privileges)
+		Destination Folder = C:\Anaconda3
+		Advanced Options:
+			■ Add Anaconda to the system PATH environment variable
+			■ Register Anaconda as the system Python 3.7
+
+10.	TensorFlow + Keras
+	コマンドプロンプト上で、以下のコマンドを入力してインストールを行う。
+	
+	conda update -y conda
+	conda update -y --all
+	conda update -y --all	２度目の実行
+	
+	● TensorFlow 1.13.1
+		conda install tensorflow-gpu==1.13.1
+		
+		conda list | find "tensor"
+			tensorboard               1.13.1           py37h33f27b4_0
+			tensorflow                1.13.1          gpu_py37h83e5d6a_0
+			tensorflow-base           1.13.1          gpu_py37h871c8ca_0
+			tensorflow-estimator      1.13.0                     py_0
+			tensorflow-gpu            1.13.1               h0d30ee6_0
+	
+	● Keras
+		conda install keras
+		
+		conda list | find "keras"
+			keras                     2.2.4                         0
+			keras-applications        1.0.8                      py_0
+			keras-base                2.2.4                    py37_0
+			keras-preprocessing       1.1.0                      py_1
+	
+	さらに、コマンドプロンプト上で、以下のコマンドを順に実行する。
+	
+	pip install joblib
+	pip install pyhamcrest
+	pip install pydot
+	pip install pydotplus
+	pip install wxpython
+	pip install graphviz
+	pip install flickrapi
+	pip install opencv-python
+	pip install playsound
+
+11.	PyTorch + TorchVision
+	https://pytorch.org/
+	
+	PyTorch Build:  Stable (1.2)
+	Your OS      :  Windows
+	Package      :  Conda
+	Language     :  Python 3.7
+	CUDA         :  10.0
+	
+	Run this Command:
+		conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+	
+	conda list | find "torch"
+		pytorch                   1.2.0           py3.7_cuda100_cudnn7_1    pytorch
+		torchvision               0.4.0                py37_cu100    pytorch
+
+12.	Notepad++ 64-bit x64
+		https://notepad-plus-plus.org/download/
+		npp.7.7.1.Installer.x64.exe
+		
+		Please select a language
+			日本語
+		
+		■ Create Shortcut on Desktop
+		□ Don't use %APPDATA%
+
+13.	WinMerge
+		https://winmergejp.bitbucket.io/
+		WinMerge-2.16.4-jp-1-x64-Setup.exe
+		
+		■ デスクトップにアイコンを作成する
+
+14.	HashTab
+		https://forest.watch.impress.co.jp/library/software/hashtabshlex/
+		HashTab_v6.0.0.34_Setup.exe
+
+15.	ELSA System Graph
+		http://www.elsa-jp.co.jp/support/download/driver/elsa_system_graph/
+		ELSA_SystemGraphV1_53.zip
+		
+		解凍して、C ドライブのトップに移動する。
+		
+		起動時に
+			NvML の初期化に失敗しました
+		とのエラーが発生するので、
+			C:\Windows\System32\nvml.dll
+		のファイルを
+			C:\Program Files\NVIDIA Corporation\NVSMI
+		のフォルダ内に上書きする。
+		
+		IPPC301d ではエラーが発生しなかった。
+			C:\Program Files\NVIDIA Corporation\NVSMI\nvml.dll
+				Filesze:
+					999,632 バイト
+				SHA-1:
+					9D11C1BD9C9390FCE0C36884DBEFED0C7B74C906
+
+16.	Core Temp
+		https://forest.watch.impress.co.jp/library/software/coretemp/
+		
+		■ Create a desktop shortcut
+		□ Build your kingdom with Goodgame Empire.
+		□ Create a shortcut to Core Temp Addons, such as the Core Temp Gadget.
+		Languages:
+		■ Install additional language packs.
+		□ Install the 'Core Temp Remote Server' plugin to allow monitoring Core Temp
+		   status from 'Core Temp Monitor'
+
+17.	Adobe Acrobat Reader DC
+		https://get.adobe.com/jp/reader/
+		readerdc_jp_xa_cra_install.exe
+
+18.	FastCopy
+		https://fastcopy.jp/
+		FastCopy363_installer.exe
+		
+		指定フォルダにインストール:
+			C:\FastCopy
+
+19.	Honeyview
+		https://www.vector.co.jp/soft/winnt/art/se507563.html
+		HONEYVIEW-SETUP.EXE
+
+20.	Git for Windows
+		https://gitforwindows.org/
+		Git-2.23.0-64-bit.exe
+		
+		■Addtional icons
+			■On the Desktop
+		■Windows Explorer integration
+			■Git Bash Here
+			■Git GUI Here
+		■Git LFS (Large File Support)
+		■Associate .git* configuration files with the default text editor
+		■Associate .sh files to be run with Bash
+		□User a True Type font in all console windows
+		□Check daily for Git for Windows updates
+		
+		Use Notepad++ as Git's default editor
+		Git from the command line and from 3rd-party software
+		Use the OpenSSL library
+		Checkout Windows-style, commit Unix-style line endings
+		Use Windows' default console window
+		■Enable file system caching
+		■Enable Git Credential Manager
+		□Enable symbolic links
+		□Enable experimental, built-in add -i/-p
+
+21.	KH DeskKeeper 2018
+		http://www.khsoft.gr.jp/software/deskkeeper2018/
+		deskkeep510.exe
+		
+		■デスクトップ上にショートカットを作成する
+		■スタートアップにショートカットを作成する
+
+22.	GIMP
+		https://forest.watch.impress.co.jp/library/software/gimp/
+		gimp-2.10.12-setup-2.exe
+
+23.	Virtual CloneDrive
+		https://forest.watch.impress.co.jp/library/software/vclonedrive/
+		SetupVirtualCloneDrive5500ahs.exe
+
+24.	ImgBurn
+		https://www.imgburn.com/index.php?act=download
+		SetupImgBurn_2.5.8.0.exe
+		https://www.nihongoka.com/jpatch_main/imgburn/
+		imgburn2580_jp2.zip
+		
+		imgburn2580_jp2.zip を解凍し、フォルダ内の
+			Japanese.lng
+		を、
+			C:\Program Files (x86)\ImgBurn\Languages
+		に移動する。
+
+25.	Graphviz
+		https://www.graphviz.org/download/
+		Windows
+			Stable 2.38 Windows install packages
+		
+		graphviz-2.38.msi
+		
+		Install for Everyone
+		インストール後に、システムの環境変数 Path に、
+			C:\Program Files (x86)\Graphviz2.38\bin
+		を追加する。
+		コマンドプロンプト上で、
+			dot -V
+		を入力して正常に実行されることを確認する。
+
+26.	HWiNFO for Windows (32/64-bit)
+		https://www.hwinfo.com/download.php
+		hwi_610.exe
+
+27.	CrystalDiskInfo
+		https://crystalmark.info/ja/software/crystaldiskinfo/
+		CrystalDiskInfo8_2_4.exe
+
+28.	Windows のアップデートによる自動再起動を抑制する。
+		https://freesoft.tvbok.com/old-tips/windows/10/prevent-auto-reboot.html
+		https://nelog.jp/harness-win10-reboot-after-update
+	
+	01. スタートボタン右クリック
+		→「ファイル名を指定して実行」を選択
+		→「gpedit.msc」と入力
+	
+	02. ローカルグループポリシー・エディタが起動するので、
+		[コンピューターの構成]＞[管理用テンプレート]＞[Windowsコンポーネント]＞[Windows Update]を開く。
+	
+	03.「スケジュールされた自動更新のインストールで、
+		ログオンしているユーザーがいる場合には自動的に再起動しない」
+		を項目をダブルクリックして開き、設定を「有効」にする。
+	
+	04.「自動更新を直ちにインストールすることを許可する」
+		を項目をダブルクリックして開き、設定を「無効」にする。
+
+**********************************************************************************
+Tensorflow の動作確認
+	
+	■ マスターでも展開イメージでも、ほぼ同じ結果となった
+	
+	コマンドプロンプト上で以下のプログラムを実行する。
+	
+	>python Tensorflow-GPU_Test.py
+	
+	Tensorflow-GPU_Test.py のコード
+
+--------------------------------------------------
+import tensorflow as tf
+import time
+
+start_time = time.time()
+
+a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name='a')
+b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name='b')
+c = tf.matmul(a, b)
+sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+print(sess.run(c))
+
+timer = time.time()
+print(timer - start_time)
+--------------------------------------------------
+	
+	インストール直後の状態では、
+		1.5109612941741943 秒
+	の時間を要したが、２度目以降は、
+		0.8791496753692627 秒
+	で実行が完了した。
+	
+	念のため、再起動後の実行時間も確認する。
+**********************************************************************************
+
+
