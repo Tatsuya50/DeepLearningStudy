@@ -1,0 +1,257 @@
+2019-08-06
+
+01.	Google Chrome を開き、自分の Google Account で Gmail を開いておく。
+
+02.	Google Colaboratory を開く。
+	https://colab.research.google.com/notebooks/welcome.ipynb?hl=ja
+
+03.	【ファイル】 ⇒ 【Python 3 の新しいノートブック】
+	を選択し、新しいノートブックを作成する。
+
+04.	【ランタイム】 ⇒ 【ランタイムのタイプを変更】
+		ランタイムのタイプ:
+			Python 3
+		ハードウェアアクセラレータ:
+			GPU
+	を選択し、【保存】ボタンをクリックする。
+
+05.	現在のタイトル
+		Untitled0.ipynb
+	を、例えば、
+		CNN_for_CIFAR10_ver_01.ipynb
+	に変更する。
+
+06.	以下のコードをセルに順番にコピペして、【Shift + Enter】 キー
+	でセルを実行する。
+	セルが実行中であっても、次のセルにコピペして 【Shirt + Enter】 キー
+	を押しても構わない。
+
+****************************************************
+import datetime
+
+start_time = datetime.datetime.now()
+print(start_time)
+****************************************************
+
+****************************************************
+import warnings
+warnings.filterwarnings('ignore')
+
+import tensorflow as tf
+tf.logging.set_verbosity(tf.logging.ERROR)
+****************************************************
+
+****************************************************
+import numpy as np
+
+seed = 123456789
+np.random.seed(seed=seed)
+****************************************************
+
+****************************************************
+from keras.datasets import cifar10
+
+# CIFAR10 のデータをロード
+(X_train, Y_train), (x_test, y_test) = cifar10.load_data()
+****************************************************
+
+****************************************************
+labels = [
+    'airplane', 'automobile', 'bird', 'cat', 'deer',
+    'dog', 'frog', 'horse', 'ship', 'truck'
+]
+****************************************************
+
+****************************************************
+X_train = X_train.astype('float32')
+x_test  = x_test.astype('float32')
+X_train /= 255
+x_test  /= 255
+****************************************************
+
+****************************************************
+from keras.utils.np_utils import to_categorical
+
+Y_train = to_categorical(Y_train)
+y_test  = to_categorical(y_test)
+****************************************************
+
+****************************************************
+from sklearn.model_selection import train_test_split
+
+# 検証用データの割合
+test_size = 0.2
+
+# 乱数の種
+random_state = 123
+
+x_train, x_valid, y_train, y_valid = train_test_split(X_train, Y_train, test_size=test_size, random_state=random_state)
+
+print("x_train.shape = ", x_train.shape)
+print("y_train.shape = ", y_train.shape)
+print("x_valid.shape = ", x_valid.shape)
+print("y_valid.shape = ", y_valid.shape)
+print("x_test.shape  = ", x_test.shape)
+print("y_test.shape  = ", y_test.shape)
+****************************************************
+
+****************************************************
+from keras.models import Sequential
+from keras.layers import InputLayer, Conv2D, Activation, MaxPooling2D
+from keras.layers import Flatten, Dense, Dropout
+
+activation = 'relu'
+
+model = Sequential()
+
+model.add(InputLayer(input_shape=x_train.shape[1:]))
+
+model.add(Conv2D(32, (3, 3)))
+model.add(Activation(activation))
+
+model.add(MaxPooling2D((2, 2)))
+
+model.add(Conv2D(64, (3, 3)))
+model.add(Activation(activation))
+
+model.add(MaxPooling2D((2, 2)))
+
+model.add(Flatten())
+
+model.add(Dense(256))
+model.add(Activation(activation))
+
+model.add(Dropout(0.5))
+
+model.add(Dense(10))
+model.add(Activation('softmax'))
+****************************************************
+
+****************************************************
+model.summary()
+****************************************************
+
+****************************************************
+model.compile(loss='categorical_crossentropy',
+              optimizer='sgd',
+              metrics=['accuracy'])
+****************************************************
+
+****************************************************
+batch_size = 32
+epochs = 100
+
+history = model.fit(x_train, y_train,
+                    batch_size=batch_size,
+                    epochs=epochs,
+                    validation_data=(x_valid, y_valid),
+                    verbose=1)
+****************************************************
+
+****************************************************
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+# acc、val_acc のプロット
+plt.figure()
+plt.plot(history.history["acc"], label="acc", ls="-", marker="o")
+plt.plot(history.history["val_acc"], label="val_acc", ls="-", marker="x")
+plt.ylabel("accuracy")
+plt.xlabel("epoch")
+plt.title("Training and validation accuracy")
+plt.legend(loc="lower right")
+
+# loss, val_loss のプロット
+plt.figure()
+plt.plot(history.history["loss"], label="loss", ls="-", marker="o")
+plt.plot(history.history["val_loss"], label="val_loss", ls="-", marker="x")
+plt.ylabel("loss")
+plt.xlabel("epoch")
+plt.title("Training and validation loss")
+plt.legend(loc="lower left")
+
+plt.show()
+****************************************************
+
+****************************************************
+loss, score = model.evaluate(x_test, y_test, batch_size=32, verbose=0)
+
+print('Test loss    :', loss)
+print('Test accuracy:', score)
+****************************************************
+
+****************************************************
+fig = plt.figure(figsize=(12, 4))
+plt.subplots_adjust(wspace=0.2, hspace=0.3, top=0.85, bottom=0.01)
+
+for i in range(10):
+    plt.subplot(2, 5, i+1)
+    plt.imshow(x_test[i])
+    plt.axis('off')
+    answer = np.argmax(y_test[i])
+    plt.title(labels[answer])
+
+plt.suptitle("The first ten of the test data", fontsize=20)
+plt.show()
+****************************************************
+
+****************************************************
+print("予測：")
+pred = np.argmax(model.predict(x_test[:10]), axis=1)
+s = ""
+for i in range(10):
+    s += "{:12s}".format(labels[pred[i]])
+print(s)
+
+print("\n正解：")
+answer = np.argmax(y_test[:10], axis=1)
+s = ""
+for i in range(10):
+    s += "{:12s}".format(labels[answer[i]])
+print(s)
+****************************************************
+
+****************************************************
+end_time = datetime.datetime.now()
+print("\nStart   Time  : " + str(start_time))
+print(  "End     Time  : " + str(end_time))
+print(  "Elapsed Time  : " + str(end_time - start_time))
+****************************************************
+
+07.	全てのセルを正常に実行できたら、
+	【ランタイム】 ⇒ 【再起動してすべてのセルを実行】
+	を選択して、すべてのセルを最初から自動で実行する。
+
+08.	【ファイル】 ⇒ 【保存】
+	を選択してから、
+	【ファイル ⇒ 【ipynb をダウンロード】
+	を選択し、自分の好きなフォルダ内にノートブックを保存する。
+
+09.	左上の黄色の無限大の形をアイコンをクリックすると、
+	Google Drive の表示に切り替わり、
+		CNN_for_CIFAR10_ver_01.ipynb
+	が保存されていることが確認できる。
+
+10.	コードを再度編集したい場合は、上記のノートブックをダブルクリックして、
+		接続済みのアプリ:
+			Google Colaboratory
+	を選択すれば、ノートブックが開くので、編集を行ってから、
+	【ランタイム】 ⇒ 【再起動してすべてのセルを実行】
+	を選択して、ノートブックを実行しエラーがないことを確認する。
+
+11.	Google Colabratory の制限事項
+	
+	● 90分ルール：
+		ノートブックを開いてから 何もせずに放置した時間が 90分を超えると、
+		接続が切られてしまう。
+	
+	● 12時間ルール：
+		起動から 12時間経過すると、セッションの有無にかかわらず、
+		接続が切られてしまう。
+	
+	参考：
+	Google Colabの使い方まとめ
+		https://qiita.com/shoji9x9/items/0ff0f6f603df18d631ab
+	Google Colaboratoryの90分セッション切れ対策【自動接続】
+		https://qiita.com/enmaru/items/2770df602dd7778d4ce6
+

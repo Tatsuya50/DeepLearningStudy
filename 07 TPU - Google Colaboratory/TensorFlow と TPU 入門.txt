@@ -1,0 +1,51 @@
+2019-08-14
+
+■ Colaboratory へようこそ
+	
+	https://colab.research.google.com/notebooks/welcome.ipynb#
+
+■ アクセラレータの使用
+	
+	TensorFlow と GPU
+		https://colab.research.google.com/notebooks/gpu.ipynb
+	TensorFlow と TPU
+		https://colab.research.google.com/notebooks/tpu.ipynb
+
+■ 機械学習の例: Seedbank
+	
+	Colaboratory で実現されたインタラクティブな機械学習解析のさまざまな例を確認するには、
+	Seedbank プロジェクトをご覧ください。
+		https://research.google.com/seedbank/
+	
+	おすすめの例をご紹介します。
+	
+	● ニューラル スタイル転送: ディープ ラーニングを使用して画像間でスタイルを転送します。
+		https://research.google.com/seedbank/seed/neural_style_transfer_with_tfkeras
+	● EZ NSynth: 音声と WaveNet オートエンコーダを合成します。
+		https://research.google.com/seedbank/seed/ez_nsynth
+	● Keras と TPU で Fashion MNIST: ファッション関連の画像をディープ ラーニングで分類します。
+		https://research.google.com/seedbank/seed/fashion_mnist_with_keras_and_tpus
+	● DeepDream: 独自の写真から DeepDream 画像を生成します。
+		https://research.google.com/seedbank/seed/deepdream
+	● 畳み込み VAE: 手書きの数字の生成モデルを作成します。
+		https://research.google.com/seedbank/seed/convolutional_vae
+
+■ TensorFlow と TPU
+	
+	https://colab.research.google.com/notebooks/tpu.ipynb
+	
+	● Next steps
+	
+	Shakespeare in 5 minutes with Cloud TPUs and Keras
+		https://colab.research.google.com/github/tensorflow/tpu/blob/master/tools/colab/shakespeare_with_tpu_and_keras.ipynb
+	Shakespeare in 5 minutes with Cloud TPUs via TPUEstimator
+		https://colab.research.google.com/github/tensorflow/tpu/blob/master/tools/colab/shakespeare_with_tpuestimator.ipynb
+	Fashion MNIST with Keras and TPUs
+		https://colab.research.google.com/github/tensorflow/tpu/blob/master/tools/colab/fashion_mnist.ipynb
+
+
+■ Google Cloud: AIと機械学習プロダクト
+	
+	https://cloud.google.com/tpu/docs/tutorials
+	
+	

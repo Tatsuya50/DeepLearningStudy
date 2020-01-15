@@ -1,0 +1,80 @@
+● NVIDIA Tesla スペック一覧
+	https://qiita.com/yukoba/items/10d0ba3fb1d19a6ab6a5
+
+注意：
+	下記の価格は、2019-08-27 現在の価格（消費税率８%）
+
+
+■ NVIDIA TITAN V (Volta: 2017)
+	https://www.nvidia.com/ja-jp/titan/titan-v/
+	
+	Memory               12 GB GDDR6
+	CUDA Cores (単精度)  5,120
+	Tensor Cores         640
+	Base Clock           1200 MHz
+	Boost Clock          1455 MHz
+	価格                 437,898 円 (税込) [Amazon]
+
+
+■ NVIDIA TITAN RTX (Turing: 2018)
+	https://www.nvidia.com/ja-jp/titan/titan-rtx/
+	
+	Memory               24 GB GDDR6
+	CUDA Cores (単精度)  4,608
+	Tensor Cores         576
+	Base Clock           1350 MHz
+	Boost Clock          1770 MHz
+	価格                 323,684 円 (税込) [Amazon]
+
+
+■ NVIDIA T4 (Turing: 2018)
+	https://www.nvidia.com/ja-jp/data-center/tesla-t4/
+	
+	Memory               16 GB GDDR6
+	CUDA Cores (単精度)  2,560
+	Tensor Cores         320
+	Base Clock           1350 MHz
+	Boost Clock          1770 MHz
+	価格                 360,418 (税込) [ぷらっとオンライン]
+
+
+■ NVIDIA Tesla K80 (Kepler: 2014)
+	http://www.elsa-jp.co.jp/products/products-top/gpu_computing/tesla_server/tesla_k/tesla_k80/
+	
+	Memory               24 GB GDDR5
+	CUDA Cores           4,992
+	Tensor Cores         
+	Base Clock           560 MHz
+	Boost Clock          562～875 Mhz
+	価格                 ---
+
+■	GeForce RTX 2080 Ti (Turing: 2018)
+	https://www.techpowerup.com/gpu-specs/geforce-rtx-2080-ti.c3305
+	
+	Memory               11 GB GDDR6
+	CUDA Cores           4,352
+	Tensor Cores         544
+	Base Clock           1350 MHz
+	Boost Clock          1545 MHz
+	価格                 174,087 円 (税込) [Amazon]
+	
+	Graphics Processor:
+		NVIDIA TU102 GPU
+		https://www.techpowerup.com/gpu-specs/nvidia-tu102.g813
+
+
+■	GeForce RTX 2060
+	https://www.nvidia.com/en-us/geforce/news/nvidia-geforce-rtx-2060/
+	
+	Memory               6 GB GDDR6
+	CUDA Cores           1,920
+	Tensor Cores         240
+	Base Clock           1680 MHz
+	Boost Clock          1365 MHz
+	価格                 46,884 円 (税込) [Amazon]
+	
+	Graphics Processor:
+		NVIDIA TU106 GPU
+		https://www.techpowerup.com/gpu-specs/nvidia-tu106.g875
+
+
